@@ -11,9 +11,9 @@ use Symfony\UX\Turbo\TurboBundle;
 class HomeController extends AbstractController
     {
         #[Route('/', name: 'app_home')]
-        public function testTurbo(): Response
+        public function home(): Response
         {
-            return $this->render('home/home.html.twig');
+            return $this->render('home/index.html.twig');
         }
 
     }

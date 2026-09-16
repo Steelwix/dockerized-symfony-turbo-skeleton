@@ -9,7 +9,7 @@ services:
       database:
         condition: service_healthy
     networks:
-      - pepperjam
+      - projectname
 
   nginx:
     image: nginx:alpine
@@ -21,16 +21,16 @@ services:
     depends_on:
       - php
     networks:
-      - pepperjam
+      - projectname
 
   database:
     image: mariadb:11
     ports:
       - "3307:3306"
     environment:
-      MARIADB_DATABASE: pepperjam
-      MARIADB_USER: pepperjam
-      MARIADB_PASSWORD: pepperjam
+      MARIADB_DATABASE: projectname
+      MARIADB_USER: projectname
+      MARIADB_PASSWORD: projectname
       MARIADB_ROOT_PASSWORD: root
     volumes:
       - database_data:/var/lib/mysql
@@ -40,19 +40,19 @@ services:
       timeout:  5s
       retries:  10
     networks:
-      - pepperjam
+      - projectname
 
   redis:
     image: redis:alpine
     networks:
-      - pepperjam
+      - projectname
 
   mailpit:
     image: axllent/mailpit:latest
     ports:
       - "8025:8025"
     networks:
-      - pepperjam
+      - projectname
 
   node:
     build:
@@ -63,10 +63,10 @@ services:
       - ./:/var/www/html
     command:     npm run dev
     networks:
-      - pepperjam
+      - projectname
 
 volumes:
   database_data:
 
 networks:
-  pepperjam:
+  projectname:
